@@ -27,7 +27,7 @@ public class Post extends DateEntity {
     private String endPlace;
     private String tmi;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Path> paths = new ArrayList<>();
 
     @OneToMany(mappedBy = "post")
