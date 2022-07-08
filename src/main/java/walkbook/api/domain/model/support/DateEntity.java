@@ -1,4 +1,4 @@
-package walkbook.domain.model.support;
+package walkbook.api.domain.model.support;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 public abstract class DateEntity {
 
     @CreatedDate
-    private LocalDateTime createdDate;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
+    private LocalDateTime lastModifiedAt;
 
 }

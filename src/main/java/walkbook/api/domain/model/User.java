@@ -1,7 +1,8 @@
-package walkbook.domain.model;
+package walkbook.api.domain.model;
 
-import lombok.NoArgsConstructor;
-import walkbook.domain.model.support.PostLike;
+import lombok.*;
+import walkbook.api.domain.model.support.DateEntity;
+import walkbook.api.domain.model.support.PostLike;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,7 +10,10 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+@Getter @Setter
+@Builder
+public class User extends DateEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,6 +24,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false, unique = true)
     private String nickname;
 
 //    @Lob
@@ -30,5 +35,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Post> myPosts = new ArrayList<>();
+
+
 
 }

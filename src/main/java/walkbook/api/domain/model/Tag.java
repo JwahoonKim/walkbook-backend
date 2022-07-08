@@ -1,7 +1,7 @@
-package walkbook.domain.model;
+package walkbook.api.domain.model;
 
 import lombok.NoArgsConstructor;
-import walkbook.domain.model.support.PostTag;
+import walkbook.api.domain.model.support.PostTag;
 
 import javax.persistence.*;
 import java.util.ArrayList;

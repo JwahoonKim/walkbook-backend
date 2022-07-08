@@ -1,13 +1,14 @@
-package walkbook.domain.model;
+package walkbook.api.domain.model.support;
 
 import lombok.NoArgsConstructor;
-import walkbook.domain.model.support.DateEntity;
+import walkbook.api.domain.model.Post;
+import walkbook.api.domain.model.User;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-public class CommentReply extends DateEntity {
+public class PostLike {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,8 +17,6 @@ public class CommentReply extends DateEntity {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Comment comment;
-
-    private String content;
+    private Post post;
 
 }

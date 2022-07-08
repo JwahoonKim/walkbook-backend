@@ -1,7 +1,7 @@
-package walkbook.domain.model.support;
+package walkbook.api.domain.model.support;
 
-import walkbook.domain.model.Post;
-import walkbook.domain.model.Tag;
+import walkbook.api.domain.model.Post;
+import walkbook.api.domain.model.Tag;
 
 import javax.persistence.*;
 

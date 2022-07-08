@@ -1,4 +1,4 @@
-package walkbook.domain.model.support;
+package walkbook.api.domain.model.support;
 
 import javax.persistence.Embeddable;
 

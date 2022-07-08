@@ -1,7 +1,7 @@
-package walkbook.domain.model;
+package walkbook.api.domain.model;
 
 import lombok.NoArgsConstructor;
-import walkbook.domain.model.support.DateEntity;
+import walkbook.api.domain.model.support.DateEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
