@@ -12,7 +12,7 @@ public class Path {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 
     // Double이라 부동소수점 오차가 생기지 않는지 확인하자.

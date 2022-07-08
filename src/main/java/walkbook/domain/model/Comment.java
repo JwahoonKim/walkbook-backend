@@ -17,10 +17,10 @@ public class Comment extends DateEntity {
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 
     @OneToMany(mappedBy = "comment")
