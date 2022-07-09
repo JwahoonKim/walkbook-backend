@@ -1,4 +1,4 @@
-package walkbook.api.request.user;
+package walkbook.api.dto.response.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

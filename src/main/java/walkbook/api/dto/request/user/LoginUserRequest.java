@@ -1,17 +1,17 @@
-package walkbook.api.request.user;
+package walkbook.api.dto.request.user;
 
 import lombok.Data;
 import walkbook.api.domain.model.User;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 @Data
 public class LoginUserRequest {
 
-    @NotEmpty
+    @NotBlank
     private String id;
 
-    @NotEmpty
+    @NotBlank
     private String password;
 
     public User toUserEntity() {
