@@ -1,6 +1,6 @@
 package walkbook.api.domain.model;
 
-import lombok.NoArgsConstructor;
+import lombok.*;
 import walkbook.api.domain.model.support.DateEntity;
 
 import javax.persistence.*;
@@ -9,6 +9,9 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter @Setter
 public class Comment extends DateEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +29,9 @@ public class Comment extends DateEntity {
     @OneToMany(mappedBy = "comment")
     private List<CommentReply> replies = new ArrayList<>();
 
+    // 연관관계 편의 메서드
+    public void setPost(Post post) {
+        this.post = post;
+        post.getComments().add(this);
+    }
 }
