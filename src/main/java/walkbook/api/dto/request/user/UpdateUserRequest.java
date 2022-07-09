@@ -1,13 +1,13 @@
-package walkbook.api.request.user;
+package walkbook.api.dto.request.user;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 @Data
 public class UpdateUserRequest {
 
-    @NotEmpty
+    @NotBlank
     private String nickname;
     private String description;
 

@@ -19,7 +19,7 @@ public class User extends DateEntity {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String username; // 로그인 아이디
 
     @Column(nullable = false)
     private String password;
@@ -31,10 +31,10 @@ public class User extends DateEntity {
     private String description;
 
     @OneToMany(mappedBy = "user")
-    private List<PostLike> postLikes = new ArrayList<>();
+    private List<PostLike> postLikes = new ArrayList<>(); // 좋아요를 누른 글
 
     @OneToMany(mappedBy = "user")
-    private List<Post> myPosts = new ArrayList<>();
+    private List<Post> myPosts = new ArrayList<>(); // 내가 작성한 글
 
 
 
