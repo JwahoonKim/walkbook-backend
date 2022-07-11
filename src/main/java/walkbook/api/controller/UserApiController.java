@@ -20,28 +20,28 @@ public class UserApiController {
     private final UserService userService;
 
     //회원 등록
-    // 중복 체크 해야함
     @PostMapping("/v1/user")
-    public CreateUserResponse signup(@Valid CreateUserRequest request) {
-        Long id = userService.join(request.toUserEntity());
+    public CreateUserResponse signup(@Valid @RequestBody CreateUserRequest request) {
+        Long id = userService.join(request);
         return new CreateUserResponse(id, request.getUsername());
     }
 
-    //회원 정보 조회, 인증 필요
+    // 회원 정보 조회
+    // TODO: 쓴 글, 좋아하는 글 정보 dto에 담아주기
     @GetMapping("/v1/user/{id}")
-    public UserDto get(@PathVariable Long id) {
-        User findUser = userService.findUser(id);
+    public UserDto findById(@PathVariable Long id) {
+        User findUser = userService.findById(id);
         return UserDto.of(findUser);
     }
 
-    //회원정보 수정, 인증 필요
+    //회원정보 수정
     @PatchMapping("/v1/user/{id}")
-    public UpdateUserResponse update(@PathVariable Long id, @Valid UpdateUserRequest updateContents) {
+    public UpdateUserResponse update(@PathVariable Long id, @Valid @RequestBody UpdateUserRequest updateContents) {
         User updateUser = userService.update(id, updateContents);
         return UpdateUserResponse.of(updateUser);
     }
 
-    //회원 삭제, 인증 필요
+    //회원 삭제
     @DeleteMapping("/v1/user/{id}")
     public String delete(@PathVariable Long id) {
         userService.remove(id);
