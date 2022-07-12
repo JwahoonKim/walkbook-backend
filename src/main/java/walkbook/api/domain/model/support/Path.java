@@ -35,10 +35,4 @@ public class Path {
         setPost(post);
         setLine(line);
     }
-
-    // 연관관계 편의 메서드
-    private void setPost(Post post) {
-        this.post = post;
-        post.getPaths().add(this);
-    }
 }

@@ -1,10 +1,8 @@
 package walkbook.api.domain.model;
 
 import lombok.*;
-import walkbook.api.domain.model.support.DateEntity;
-import walkbook.api.domain.model.support.Path;
-import walkbook.api.domain.model.support.PostLike;
-import walkbook.api.domain.model.support.PostTag;
+import walkbook.api.domain.model.support.*;
+import walkbook.api.dto.request.post.UpdatePostRequest;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,7 +29,7 @@ public class Post extends DateEntity {
     private String endPlace;
     private String tmi;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Path> paths = new ArrayList<>();
 
     @OneToMany(mappedBy = "post")
@@ -52,5 +50,24 @@ public class Post extends DateEntity {
     public void setUser(User user) {
         this.user = user;
         user.getMyPosts().add(this);
+    }
+
+    public void addPath(Path path) {
+        paths.add(path);
+        path.setPost(this);
+    }
+
+    public void update(UpdatePostRequest request) {
+        this.title = request.getTitle();
+        this.description = request.getDescription();
+        this.startPlace = request.getStartPlace();
+        this.endPlace = request.getEndPlace();
+        this.tmi = request.getTmi();
+        updatePaths(request.getPaths());
+    }
+
+    private void updatePaths(List<Line> lines) {
+        this.paths.clear();
+        lines.forEach(line -> addPath(new Path(this, line)));
     }
 }

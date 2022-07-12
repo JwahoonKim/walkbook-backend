@@ -4,6 +4,7 @@ import lombok.Data;
 import walkbook.api.domain.model.support.Line;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class UpdatePostRequest {
     @NotBlank
     private String tmi;
 
+    @Size(min = 1)
     private List<Line> paths = new ArrayList<>();
 
 }

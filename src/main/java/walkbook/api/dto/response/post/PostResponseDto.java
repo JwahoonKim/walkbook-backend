@@ -1,11 +1,10 @@
 package walkbook.api.dto.response.post;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import walkbook.api.domain.model.Post;
 import walkbook.api.domain.model.User;
 import walkbook.api.domain.model.support.Line;
+import walkbook.api.domain.model.support.Path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,7 @@ import java.util.List;
 @Builder
 public class PostResponseDto {
 
+    private Long postId;
     private UserResponseDto user;
     private String title;
     private String description;
@@ -23,12 +23,14 @@ public class PostResponseDto {
     private String tmi;
 
     private final List<Line> paths = new ArrayList<>();
+    // TODO: 아래 내용 채워주기
 //    private List<PostTag> postTags = new ArrayList<>();
 //    private List<PostLike> like = new ArrayList<>();
 //    private List<Comment> comments = new ArrayList<>();
 
     public static PostResponseDto of(Post post) {
         PostResponseDto dto = PostResponseDto.builder()
+                .postId(post.getId())
                 .user(new UserResponseDto(post.getUser()))
                 .title(post.getTitle())
                 .description(post.getDescription())
@@ -38,15 +40,19 @@ public class PostResponseDto {
                 .build();
 
         // Path 정보 담아주기
-        post.getPaths().stream()
-                .map(Line::new)
-                .forEach(line -> dto.getPaths().add(line));
+        pathSetting(dto, post.getPaths());
 
         return dto;
     }
 
+    private static void pathSetting(PostResponseDto dto, List<Path> paths) {
+        paths.stream()
+                .map(Line::new)
+                .forEach(line -> dto.getPaths().add(line));
+    }
+
     @Data
-    private static class UserResponseDto {
+    public static class UserResponseDto {
 
         private Long id;
         private String username;

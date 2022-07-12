@@ -17,9 +17,8 @@ public class PostApiController {
     private final PostService postService;
 
     // 글 등록
-    // 글 쓸때 유저 아이디를 변경해서 보내면 딴 사람이 쓴게 되는데 어떻게 처리하지?
     @PostMapping("/v1/post")
-    public Long create(@Valid @RequestBody CreatePostRequest request) {
+    public PostResponseDto create(@Valid @RequestBody CreatePostRequest request) {
         return postService.save(request);
     }
 
@@ -31,8 +30,8 @@ public class PostApiController {
 
     // 글 수정
     @PatchMapping("/v1/post/{id}")
-    public void update(@PathVariable Long id, @Valid @RequestBody UpdatePostRequest request) {
-        postService.update(id, request);
+    public PostResponseDto update(@PathVariable Long id, @Valid @RequestBody UpdatePostRequest request) {
+        return postService.update(id, request);
     }
 
     // 글 삭제
