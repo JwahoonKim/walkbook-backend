@@ -1,9 +1,9 @@
-package walkbook.api.domain.model;
+package walkbook.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import walkbook.api.domain.model.support.DateEntity;
+import walkbook.domain.support.DateEntity;
 
 import javax.persistence.*;
 
@@ -27,5 +27,13 @@ public class CommentReply extends DateEntity {
     public void setComment(Comment comment) {
         this.comment = comment;
         comment.getReplies().add(this);
+    }
+
+    public static CommentReply creatCommentReply(User user, Comment comment, String content) {
+        CommentReply commentReply = new CommentReply();
+        commentReply.setUser(user);
+        commentReply.setComment(comment);
+        commentReply.setContent(content);
+        return commentReply;
     }
 }

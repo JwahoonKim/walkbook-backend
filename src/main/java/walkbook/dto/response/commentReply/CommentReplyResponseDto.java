@@ -1,9 +1,9 @@
-package walkbook.api.dto.response.commentReply;
+package walkbook.dto.response.commentReply;
 
 import lombok.Data;
-import walkbook.api.domain.model.Comment;
-import walkbook.api.domain.model.CommentReply;
-import walkbook.api.domain.model.User;
+import walkbook.domain.Comment;
+import walkbook.domain.CommentReply;
+import walkbook.domain.User;
 
 @Data
 public class CommentReplyResponseDto {
@@ -23,8 +23,7 @@ public class CommentReplyResponseDto {
     }
 
     @Data
-    private static class CommentDto {
-
+    public static class CommentDto {
         private Long id;
         private String content;
 
@@ -35,8 +34,7 @@ public class CommentReplyResponseDto {
     }
 
     @Data
-    private static class UserDto {
-
+    public static class UserDto {
         private Long id;
         private String username;
 
