@@ -1,8 +1,8 @@
-package walkbook.api.dto.response.comment;
+package walkbook.dto.response.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import walkbook.api.domain.model.Comment;
+import walkbook.domain.Comment;
 
 @Data
 public class CommentResponseDto {
@@ -19,18 +19,18 @@ public class CommentResponseDto {
         post = new PostDto(comment.getPost().getId(), comment.getPost().getTitle());
     }
 
-    // 대댓글 정보 추가할 예정
+    // TODO: 대댓글 정보 추가
 
     @Data
     @AllArgsConstructor
-    private static class UserDto {
+    public static class UserDto {
         private Long id;
         private String username;
     }
 
     @Data
     @AllArgsConstructor
-    private static class PostDto {
+    public static class PostDto {
         private Long postId;
         private String title;
     }

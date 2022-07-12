@@ -1,7 +1,7 @@
-package walkbook.api.domain.model;
+package walkbook.domain;
 
 import lombok.*;
-import walkbook.api.domain.model.support.DateEntity;
+import walkbook.domain.support.DateEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,12 +26,21 @@ public class Comment extends DateEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 
-    @OneToMany(mappedBy = "comment")
-    private List<CommentReply> replies = new ArrayList<>();
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<CommentReply> replies = new ArrayList<>();
 
     // 연관관계 편의 메서드
     public void setPost(Post post) {
         this.post = post;
         post.getComments().add(this);
     }
+
+    public static Comment createComment(User user, Post post, String content) {
+        Comment comment = new Comment();
+        comment.setUser(user);
+        comment.setPost(post);
+        comment.setContent(content);
+        return comment;
+    }
+
 }

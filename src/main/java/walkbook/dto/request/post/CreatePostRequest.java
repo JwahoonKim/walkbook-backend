@@ -1,12 +1,12 @@
-package walkbook.api.dto.request.post;
+package walkbook.dto.request.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import walkbook.api.domain.model.Post;
-import walkbook.api.domain.model.User;
-import walkbook.api.domain.model.support.Line;
-import walkbook.api.domain.model.support.Path;
+import walkbook.domain.Post;
+import walkbook.domain.User;
+import walkbook.domain.support.Line;
+import walkbook.domain.support.Path;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
