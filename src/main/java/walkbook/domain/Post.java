@@ -35,7 +35,7 @@ public class Post extends DateEntity {
     @OneToMany(mappedBy = "post")
     private final List<PostTag> postTags = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private final List<PostLike> like = new ArrayList<>();
 
     @OneToMany(mappedBy = "post")

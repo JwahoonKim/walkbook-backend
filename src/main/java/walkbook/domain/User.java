@@ -30,8 +30,8 @@ public class User extends DateEntity {
 //    @Lob
     private String description;
 
-    @OneToMany(mappedBy = "user")
-    private final List<PostLike> postLikes = new ArrayList<>(); // 좋아요를 누른 글
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<PostLike> likePosts = new ArrayList<>(); // 좋아요를 누른 글
 
     @OneToMany(mappedBy = "user")
     private final List<Post> myPosts = new ArrayList<>(); // 내가 작성한 글

@@ -3,6 +3,7 @@ package walkbook.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import walkbook.dto.request.post.CreatePostRequest;
+import walkbook.dto.request.post.LikePostRequest;
 import walkbook.dto.request.post.UpdatePostRequest;
 import walkbook.dto.response.post.PostResponseDto;
 import walkbook.service.PostService;
@@ -40,4 +41,9 @@ public class PostController {
         return postService.delete(id);
     }
 
+    // 좋아요 기능
+    @GetMapping("/v1/post/{postId}/like")
+    public void likePost(@PathVariable Long postId, @RequestBody LikePostRequest request) {
+        postService.like(postId, request.getUserId());
+    }
 }

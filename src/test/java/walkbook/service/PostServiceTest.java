@@ -3,17 +3,22 @@ package walkbook.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import walkbook.domain.Post;
+import walkbook.domain.User;
 import walkbook.domain.support.Line;
+import walkbook.domain.support.PostLike;
 import walkbook.dto.request.post.CreatePostRequest;
 import walkbook.dto.request.post.UpdatePostRequest;
 import walkbook.dto.request.user.CreateUserRequest;
 import walkbook.dto.response.post.PostResponseDto;
+import walkbook.repository.PostLikeRepository;
 import walkbook.repository.PostRepository;
 import walkbook.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,10 +29,14 @@ class PostServiceTest {
 
     @Autowired
     PostService postService;
-    @Autowired PostRepository postRepository;
+    @Autowired
+    PostRepository postRepository;
+    @Autowired
+    PostLikeRepository postLikeRepository;
     @Autowired
     UserService userService;
-    @Autowired UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Test
     public void 글_등록_성공() {
@@ -188,7 +197,32 @@ class PostServiceTest {
 
         //then
         assertThrows(RuntimeException.class, () -> postService.findById(savedPost.getPostId()).getPostId());
+    }
 
+    @Test
+    public void 글_좋아요_성공() {
+        //given
+        User user = new User("kim", "1234", "nick1", "desc1");
+        User savedUser = userRepository.save(user);
+
+        Post post = new Post(user, "title1", "desc1", "start1", "end1", "tmi1");
+        Post savedPost = postRepository.save(post);
+
+        // excepted1 - 좋아요를 누르지 않은 상태
+        postService.like(savedPost.getId(), savedUser.getId());
+        PostLike like = postLikeRepository.findPostLikeByUserAndPost(savedUser, savedPost).get();
+
+        assertThat(like.getPost().getTitle()).isEqualTo(post.getTitle());
+        assertThat(like.getUser().getUsername()).isEqualTo("kim");
+        assertThat(user.getLikePosts().size()).isEqualTo(1);
+        assertThat(post.getLike().size()).isEqualTo(1);
+
+        // expected2 - 좋아요를 누른 상태
+        postService.like(savedPost.getId(), savedUser.getId());
+        Optional<PostLike> like2 = postLikeRepository.findPostLikeByUserAndPost(savedUser, savedPost);
+        assertThat(like2.isEmpty()).isTrue();
+        assertThat(user.getLikePosts().size()).isEqualTo(0);
+        assertThat(post.getLike().size()).isEqualTo(0);
     }
 
 }
