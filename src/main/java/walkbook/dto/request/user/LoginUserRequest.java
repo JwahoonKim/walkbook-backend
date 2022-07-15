@@ -9,14 +9,14 @@ import javax.validation.constraints.NotBlank;
 public class LoginUserRequest {
 
     @NotBlank(message = "아이디를 입력해주세요.")
-    private String id;
+    private String username;
 
     @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
     public User toUserEntity() {
         return User.builder()
-                .username(id)
+                .username(username)
                 .password(password)
                 .build();
     }

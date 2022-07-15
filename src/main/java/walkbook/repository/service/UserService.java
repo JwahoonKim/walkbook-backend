@@ -1,13 +1,15 @@
-package walkbook.service;
+package walkbook.repository.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import walkbook.auth.JwtUtils;
 import walkbook.domain.User;
 import walkbook.dto.request.user.CreateUserRequest;
 import walkbook.dto.request.user.UpdateUserRequest;
 import walkbook.repository.UserRepository;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 @Service
@@ -28,6 +30,17 @@ public class UserService {
         validateNickname(user.getNickname());
         userRepository.save(user);
         return user.getId();
+    }
+
+    public void login(String username, String password, HttpServletResponse response) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다."));
+        if (password.equals(user.getPassword())) {
+            JwtUtils jwtUtils = new JwtUtils();
+            String jwt = jwtUtils.createJwt(username);
+            response.setHeader("Authorization", jwt);
+        } else {
+            throw new RuntimeException("비밀번호가 틀렸습니다.");
+        }
     }
 
     public void remove(Long id) {
@@ -64,5 +77,6 @@ public class UserService {
             throw new RuntimeException("닉네임이 중복됩니다.");
         }
     }
+
 
 }

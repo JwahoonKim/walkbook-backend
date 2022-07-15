@@ -23,10 +23,10 @@ public class CreateUserRequest {
 
     private String description;
 
-
     public User toUserEntity() {
         return User.builder()
                 .username(username)
+//                .password(passwordEncoder.encode(password))
                 .password(password)
                 .nickname(nickname)
                 .description(description)
