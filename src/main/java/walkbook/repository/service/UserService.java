@@ -18,6 +18,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final JwtUtils jwtUtils;
 
     public User findById(Long id) {
         return userRepository.findById(id)
@@ -35,7 +36,6 @@ public class UserService {
     public void login(String username, String password, HttpServletResponse response) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다."));
         if (password.equals(user.getPassword())) {
-            JwtUtils jwtUtils = new JwtUtils();
             String jwt = jwtUtils.createJwt(username);
             response.setHeader("Authorization", jwt);
         } else {
@@ -43,19 +43,27 @@ public class UserService {
         }
     }
 
-    public void remove(Long id) {
+    public void remove(User authUser, Long id) {
+        authCheck(authUser, id);
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다. id = " + id));
         userRepository.delete(user);
     }
 
-    public User update(Long id, UpdateUserRequest updateContents) {
+    public User update(User authUser, Long id, UpdateUserRequest updateContents) {
+        authCheck(authUser, id);
         validateNickname(updateContents.getNickname(), id);
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다. id = " + id));
         user.setNickname(updateContents.getNickname());
         user.setDescription(updateContents.getDescription());
         return user;
+    }
+
+    private void authCheck(User authUser, Long id) {
+        if (authUser == null || !id.equals(authUser.getId())) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
     }
 
     private void validateUsername(String username) {
