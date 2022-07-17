@@ -1,4 +1,4 @@
-package walkbook.repository.service;
+package walkbook.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -7,6 +7,8 @@ import walkbook.auth.JwtUtils;
 import walkbook.domain.User;
 import walkbook.dto.request.user.CreateUserRequest;
 import walkbook.dto.request.user.UpdateUserRequest;
+import walkbook.dto.response.user.UserDetailResponse;
+import walkbook.dto.response.user.UserResponseDto;
 import walkbook.repository.UserRepository;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,17 +22,19 @@ public class UserService {
     private final UserRepository userRepository;
     private final JwtUtils jwtUtils;
 
-    public User findById(Long id) {
-        return userRepository.findById(id)
+    public UserDetailResponse findById(User authUser, Long id) {
+        authCheck(authUser, id);
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다. id = " + id));
+        return UserDetailResponse.of(user);
     }
 
-    public Long join(CreateUserRequest request) {
+    public UserResponseDto join(CreateUserRequest request) {
         User user = request.toUserEntity();
         validateUsername(user.getUsername());
         validateNickname(user.getNickname());
-        userRepository.save(user);
-        return user.getId();
+        User savedUser = userRepository.save(user);
+        return UserResponseDto.of(savedUser);
     }
 
     public void login(String username, String password, HttpServletResponse response) {
@@ -45,19 +49,17 @@ public class UserService {
 
     public void remove(User authUser, Long id) {
         authCheck(authUser, id);
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다. id = " + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다. id = " + id));
         userRepository.delete(user);
     }
 
-    public User update(User authUser, Long id, UpdateUserRequest updateContents) {
+    public UserResponseDto update(User authUser, Long id, UpdateUserRequest updateContents) {
         authCheck(authUser, id);
         validateNickname(updateContents.getNickname(), id);
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다. id = " + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다. id = " + id));
         user.setNickname(updateContents.getNickname());
         user.setDescription(updateContents.getDescription());
-        return user;
+        return UserResponseDto.of(user);
     }
 
     private void authCheck(User authUser, Long id) {

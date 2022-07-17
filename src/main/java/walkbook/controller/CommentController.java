@@ -24,6 +24,7 @@ public class CommentController {
     }
 
     // 댓글 조회
+    // TODO: 자기가 쓴 댓글인지 알려주기
     @GetMapping("/v1/comment/{commentId}")
     public CommentResponseDto findById(@PathVariable Long commentId) {
         Comment comment = commentService.findById(commentId);

@@ -36,9 +36,11 @@ class UserRepositoryTest {
                 .build();
         //when
         User savedUser = userRepository.save(user);
-
+        System.out.println("savedUser.getPassword() = " + savedUser.getPassword());
+                
         //then
         User findUser = em.find(User.class, savedUser.getId());
+        assertThat(findUser).isSameAs(savedUser);
         assertThat(findUser.getId()).isEqualTo(savedUser.getId());
         assertThat(findUser.getUsername()).isEqualTo("user1");
         assertThat(findUser.getPassword()).isEqualTo("1234");

@@ -23,6 +23,7 @@ public class CreateUserRequest {
 
     private String description;
 
+    // TODO: 비밀번호 암호화하기
     public User toUserEntity() {
         return User.builder()
                 .username(username)

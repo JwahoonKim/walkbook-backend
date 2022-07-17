@@ -1,0 +1,1 @@
+web: java -jar build/libs/walkbook-backend-0.0.1-SNAPSHOT.jar

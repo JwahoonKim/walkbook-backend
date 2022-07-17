@@ -31,7 +31,7 @@ public class AuthUserInterceptor implements HandlerInterceptor {
         String jwt = authToken.replace("Bearer ", "");
         String username = jwtUtils.getUsernameFromJwt(jwt);
 
-        authUser = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("해당 아이디의 유저가 없습니다. 토큰 에러!"));
+        authUser = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("해당 아이디의 유저가 없습니다."));
         request.setAttribute("authUser", authUser);
         return true;
     }

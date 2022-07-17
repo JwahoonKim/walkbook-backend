@@ -33,9 +33,8 @@ public class User extends DateEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<PostLike> likePosts = new ArrayList<>(); // 좋아요를 누른 글
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Post> myPosts = new ArrayList<>(); // 내가 작성한 글
-
 
     public User(String username, String password, String nickname, String description) {
         this.username =  username;
@@ -43,4 +42,10 @@ public class User extends DateEntity {
         this.nickname = nickname;
         this.description = description;
     }
+
+    //== 패스워드 암호화 ==//
+//    public void encodePassword(PasswordEncoder passwordEncoder){
+//        this.password = passwordEncoder.encode(password);
+//    }
+
 }

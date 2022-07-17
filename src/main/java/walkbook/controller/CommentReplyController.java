@@ -21,6 +21,7 @@ public class CommentReplyController {
     }
 
     // 대댓글 조회
+    // TODO: 자기가 쓴 대댓글인지 알려주기
     @GetMapping("/v1/comment/comment-reply/{replyId}")
     public CommentReplyResponseDto findById(@PathVariable Long replyId) {
         return commentReplyService.findById(replyId);
