@@ -9,7 +9,6 @@ import walkbook.domain.support.Line;
 import walkbook.domain.support.Path;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreatePostRequest {
-
-    @NotNull
-    private Long userId;
 
     @NotBlank
     private String title;

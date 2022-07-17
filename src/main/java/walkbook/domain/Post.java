@@ -38,9 +38,8 @@ public class Post extends DateEntity {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private final List<PostLike> like = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Comment> comments = new ArrayList<>();
-
 
     // 대댓글을 Post에서 관리해야할지 고민해보자
 //    private List<ReplyComment> replyComments = new ArrayList<>();
