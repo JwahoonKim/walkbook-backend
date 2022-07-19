@@ -1,17 +1,9 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/walkbook?serverTimezone=Asia/Seoul
-    username: root
-    password: se
-
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-
-    hibernate:
-      ddl-auto: create
-
+    url: jdbc:h2:mem:testdb;NON_KEYWORDS=USER
   profiles:
     include: secret
-server:
-  port: 8080
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
