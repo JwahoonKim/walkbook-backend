@@ -22,29 +22,40 @@ public class CommentService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    public CommentResponseDto save(Long postId, CreateCommentRequest request) {
-        User user = userRepository.findById(request.getUserId()).orElseThrow(() -> new RuntimeException("해당 id의 회원이 존재하지 않습니다."));
+    public CommentResponseDto save(User authUser, Long postId, CreateCommentRequest request) {
+        if (authUser == null) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
+        User user = userRepository.findById(authUser.getId()).orElseThrow(() -> new RuntimeException("해당 id의 회원이 존재하지 않습니다."));
         Post post = postRepository.findById(postId).orElseThrow(() -> new RuntimeException("해당 id의 글이 존재하지 않습니다."));
         Comment comment = Comment.createComment(user, post, request.getContent());
         Comment saved = commentRepository.save(comment);
-        return new CommentResponseDto(saved);
+        return CommentResponseDto.of(authUser, saved);
     }
 
 
-    public Comment findById(Long id) {
-        return commentRepository.findById(id)
+    public CommentResponseDto findById(User authUser, Long id) {
+        Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 id의 댓글이 존재하지 않습니다."));
+        return CommentResponseDto.of(authUser, comment);
     }
 
-    public Long update(Long id, UpdateCommentRequest request) {
+    public void update(User authUser, Long id, UpdateCommentRequest request) {
         Comment comment = commentRepository.findById(id).orElseThrow(() -> new RuntimeException("해당 id의 댓글이 존재하지 않습니다."));
+        authCheck(authUser, comment);
         comment.setContent(request.getContent());
-        return comment.getId();
     }
 
-    public void delete(Long id) {
+    public void delete(User authUser, Long id) {
         Comment comment = commentRepository.findById(id).orElseThrow(() -> new RuntimeException("해당 id의 댓글이 존재하지 않습니다."));
+        authCheck(authUser, comment);
         commentRepository.delete(comment);
     }
 
+    private void authCheck(User authUser, Comment comment) {
+        User author = comment.getUser();
+        if (!authUser.getId().equals(author.getId())) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
+    }
 }
