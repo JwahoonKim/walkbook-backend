@@ -3,7 +3,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3307/walkbook?serverTimezone=Asia/Seoul
     username: root
-    password: se
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -13,5 +12,4 @@ spring:
 
   profiles:
     include: secret
-server:
-  port: 8080
+
