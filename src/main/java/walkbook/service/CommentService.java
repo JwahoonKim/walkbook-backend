@@ -33,7 +33,6 @@ public class CommentService {
         return CommentResponseDto.of(authUser, saved);
     }
 
-
     public CommentResponseDto findById(User authUser, Long id) {
         Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 id의 댓글이 존재하지 않습니다."));
@@ -53,6 +52,9 @@ public class CommentService {
     }
 
     private void authCheck(User authUser, Comment comment) {
+        if (authUser == null)
+            throw new RuntimeException("권한이 없습니다.");
+
         User author = comment.getUser();
         if (!authUser.getId().equals(author.getId())) {
             throw new RuntimeException("권한이 없습니다.");
