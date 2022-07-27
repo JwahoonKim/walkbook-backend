@@ -25,6 +25,7 @@ public class PostController {
         return postService.save(authUser, request);
     }
 
+    // 글 전부 조회
     @GetMapping("/v1/post/all")
     public PostListResponse findAll(@AuthUser User authUser) {
         return postService.findAll(authUser);

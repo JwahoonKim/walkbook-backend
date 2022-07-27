@@ -17,11 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Transactional
 class UserServiceTest {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
+    @Autowired private UserService userService;
+    @Autowired private UserRepository userRepository;
 
     @Test
     public void 회원가입_성공() {
