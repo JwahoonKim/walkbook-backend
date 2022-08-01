@@ -1,7 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.7.1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id "org.asciidoctor.convert" version "1.5.9.2"
+    id "org.asciidoctor.convert" version "1.5.9"
     id 'java'
 }
 
@@ -28,10 +28,11 @@ asciidoctor {
     dependsOn test
 }
 
-bootJar {
+bootJar{
     dependsOn asciidoctor
-    from ("${asciidoctor.outputDir}/html5") {
-        into 'static/docs'
+    copy {
+        from "build/asciidoc/html5"
+        into "src/main/resources/static/docs"
     }
 }
 
