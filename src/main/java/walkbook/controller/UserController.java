@@ -26,7 +26,6 @@ public class UserController {
     @PostMapping("/v1/user/signup")
     public UserResponseDto signup(@Valid @RequestBody CreateUserRequest request) {
         return userService.join(request);
-//        return new CreateUserResponse(id, request.getUsername());
     }
 
     // 로그인

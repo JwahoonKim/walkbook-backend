@@ -1,11 +1,14 @@
 package walkbook.dto.request.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import walkbook.domain.User;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginUserRequest {
 
     @NotBlank(message = "아이디를 입력해주세요.")
@@ -13,11 +16,4 @@ public class LoginUserRequest {
 
     @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
-
-    public User toUserEntity() {
-        return User.builder()
-                .username(username)
-                .password(password)
-                .build();
-    }
 }

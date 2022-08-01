@@ -37,11 +37,12 @@ public class UserService {
         return UserResponseDto.of(savedUser);
     }
 
-    public void login(String username, String password, HttpServletResponse response) {
+    public String login(String username, String password, HttpServletResponse response) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("해당 아이디의 회원이 존재하지 않습니다."));
         if (password.equals(user.getPassword())) {
             String jwt = jwtUtils.createJwt(username);
             response.setHeader("Authorization", jwt);
+            return jwt;
         } else {
             throw new RuntimeException("비밀번호가 틀렸습니다.");
         }
