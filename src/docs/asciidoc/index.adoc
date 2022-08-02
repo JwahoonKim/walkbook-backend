@@ -112,4 +112,44 @@ include::{snippets}/글 좋아요/request-headers.adoc[]
 
 ===== HTTP 응답
 include::{snippets}/글 좋아요/http-response.adoc[]
+
+== 댓글 API
+=== 댓글 등록
+===== HTTP 요청
+include::{snippets}/댓글 등록/http-request.adoc[]
+include::{snippets}/댓글 등록/path-parameters.adoc[]
+include::{snippets}/댓글 등록/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/댓글 등록/http-response.adoc[]
+---
+
+=== 댓글 조회
+===== HTTP 요청
+include::{snippets}/댓글 조회/http-request.adoc[]
+include::{snippets}/댓글 조회/path-parameters.adoc[]
+include::{snippets}/댓글 조회/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/댓글 조회/http-response.adoc[]
+---
+
+=== 댓글 수정
+===== HTTP 요청
+include::{snippets}/댓글 수정/http-request.adoc[]
+include::{snippets}/댓글 수정/path-parameters.adoc[]
+include::{snippets}/댓글 수정/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/댓글 수정/http-response.adoc[]
+---
+
+=== 댓글 삭제
+===== HTTP 요청
+include::{snippets}/댓글 삭제/http-request.adoc[]
+include::{snippets}/댓글 삭제/path-parameters.adoc[]
+include::{snippets}/댓글 삭제/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/댓글 삭제/http-response.adoc[]
 ---
