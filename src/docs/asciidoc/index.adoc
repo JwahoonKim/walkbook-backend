@@ -1,0 +1,115 @@
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+
+
+//[[resources-user]]
+== 회원 API
+---
+
+//[[resources-user-회원가입]]
+=== 회원가입
+
+===== HTTP 요청
+include::{snippets}/회원가입/http-request.adoc[]
+
+===== HTTP 응답
+include::{snippets}/회원가입/http-response.adoc[]
+---
+
+=== 로그인
+===== HTTP 요청
+include::{snippets}/로그인/http-request.adoc[]
+
+===== HTTP 응답
+include::{snippets}/로그인/http-response.adoc[]
+include::{snippets}/로그인/response-headers.adoc[]
+---
+
+=== 회원정보 조회
+===== HTTP 요청
+include::{snippets}/회원정보 조회/http-request.adoc[]
+include::{snippets}/회원정보 조회/path-parameters.adoc[]
+include::{snippets}/회원정보 조회/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/회원정보 조회/http-response.adoc[]
+---
+
+=== 회원정보 수정
+===== HTTP 요청
+include::{snippets}/회원정보 수정/http-request.adoc[]
+include::{snippets}/회원정보 수정/path-parameters.adoc[]
+include::{snippets}/회원정보 수정/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/회원정보 수정/http-response.adoc[]
+---
+
+=== 회원정보 삭제
+===== HTTP 요청
+include::{snippets}/회원정보 삭제/http-request.adoc[]
+include::{snippets}/회원정보 삭제/path-parameters.adoc[]
+include::{snippets}/회원정보 삭제/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/회원정보 삭제/http-response.adoc[]
+
+
+== 산책로 API
+=== 글 등록
+===== HTTP 요청
+include::{snippets}/글 등록/http-request.adoc[]
+
+===== HTTP 응답
+include::{snippets}/글 등록/http-response.adoc[]
+---
+
+=== 글 전부 조회
+===== HTTP 요청
+include::{snippets}/글 전부 조회/http-request.adoc[]
+include::{snippets}/글 전부 조회/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/글 전부 조회/http-response.adoc[]
+---
+
+=== 글 단건 조회
+===== HTTP 요청
+include::{snippets}/글 단건 조회/http-request.adoc[]
+include::{snippets}/글 수정/path-parameters.adoc[]
+include::{snippets}/글 단건 조회/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/글 단건 조회/http-response.adoc[]
+---
+
+=== 글 수정
+===== HTTP 요청
+include::{snippets}/글 수정/http-request.adoc[]
+include::{snippets}/글 수정/path-parameters.adoc[]
+include::{snippets}/글 수정/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/글 수정/http-response.adoc[]
+---
+
+=== 글 삭제
+===== HTTP 요청
+include::{snippets}/글 삭제/http-request.adoc[]
+include::{snippets}/글 삭제/path-parameters.adoc[]
+include::{snippets}/글 삭제/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/글 삭제/http-response.adoc[]
+---
+
+=== 글 좋아요
+===== HTTP 요청
+include::{snippets}/글 좋아요/http-request.adoc[]
+include::{snippets}/글 좋아요/path-parameters.adoc[]
+include::{snippets}/글 좋아요/request-headers.adoc[]
+
+===== HTTP 응답
+include::{snippets}/글 좋아요/http-response.adoc[]
+---

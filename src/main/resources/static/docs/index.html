@@ -435,13 +435,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#resources-user">회원 API</a>
+<li><a href="#_회원_api">회원 API</a>
 <ul class="sectlevel2">
-<li><a href="#resources-user-회원가입">회원가입</a></li>
+<li><a href="#_회원가입">회원가입</a></li>
 <li><a href="#_로그인">로그인</a></li>
 <li><a href="#_회원정보_조회">회원정보 조회</a></li>
 <li><a href="#_회원정보_수정">회원정보 수정</a></li>
 <li><a href="#_회원정보_삭제">회원정보 삭제</a></li>
+</ul>
+</li>
+<li><a href="#_산책로_api">산책로 API</a>
+<ul class="sectlevel2">
+<li><a href="#_글_등록">글 등록</a></li>
+<li><a href="#_글_전부_조회">글 전부 조회</a></li>
+<li><a href="#_글_단건_조회">글 단건 조회</a></li>
+<li><a href="#_글_수정">글 수정</a></li>
+<li><a href="#_글_삭제">글 삭제</a></li>
+<li><a href="#_글_좋아요">글 좋아요</a></li>
 </ul>
 </li>
 </ul>
@@ -449,11 +459,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="resources-user">회원 API</h2>
+<h2 id="_회원_api">회원 API</h2>
 <div class="sectionbody">
 <hr>
 <div class="sect2">
-<h3 id="resources-user-회원가입">회원가입</h3>
+<h3 id="_회원가입">회원가입</h3>
 <div class="sect4">
 <h5 id="_http_요청">HTTP 요청</h5>
 <div class="listingblock">
@@ -478,10 +488,10 @@ Host: walkbook-api.herokuapp.com
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 102
+Content-Length: 103
 
 {
-  "id" : 7,
+  "id" : 13,
   "username" : "username1",
   "nickname" : "nickname1",
   "description" : "desc1"
@@ -514,7 +524,7 @@ Host: walkbook-api.herokuapp.com
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTkzNzcwNjksImlhdCI6MTY1OTM3NTI2OSwidXNlcm5hbWUiOiJ1c2VybmFtZTEifQ.xOy5SW3KWB7PsMZgSsFCrizMUm9xd9R_ZwuMjhbV2iWNO9WA1MEmuY640ya-gtjp6dq_RDPEO7fisOHIFA7nFg
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM5MDAsImlhdCI6MTY1OTQ1MjEwMCwidXNlcm5hbWUiOiJ1c2VybmFtZTEifQ.QoNqGOIzserK1QA5Hw3AVaCVSK6_lzIXs3Z9q8fvaOM4gjwWXcgSv5j5_6wTpW0KWoa3-xo4rRGJ2zMcu2fcxQ
 Content-Type: text/plain;charset=UTF-8
 Content-Length: 2
 
@@ -548,8 +558,8 @@ ok</code></pre>
 <h5 id="_http_요청_3">HTTP 요청</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/user/2 HTTP/1.1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTkzNzcwNjksImlhdCI6MTY1OTM3NTI2OSwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.N0F3HhZpOFCdc7psXqHb_O0hcj-EqpBK5WUVYBoWU6PKwXshzavbjfKiRxlp8s4phyxRelEih6O9s_rU6HKBeg
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/user/8 HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM5MDAsImlhdCI6MTY1OTQ1MjEwMCwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.WDGzSVrz5zLY1Petrg0BrnMYJCOtuJpLEKQi-MqCpImn5co6puabkGP78RUJTY22apRFZdNOX6JghlA8JpowGA
 Host: walkbook-api.herokuapp.com</code></pre>
 </div>
 </div>
@@ -600,7 +610,7 @@ Content-Type: application/json
 Content-Length: 136
 
 {
-  "id" : 2,
+  "id" : 8,
   "username" : "defaultUsername",
   "nickname" : "defaultNick",
   "description" : "defaultDesc",
@@ -617,9 +627,9 @@ Content-Length: 136
 <h5 id="_http_요청_4">HTTP 요청</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/v1/user/1 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/v1/user/7 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTkzNzcwNjksImlhdCI6MTY1OTM3NTI2OSwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.N0F3HhZpOFCdc7psXqHb_O0hcj-EqpBK5WUVYBoWU6PKwXshzavbjfKiRxlp8s4phyxRelEih6O9s_rU6HKBeg
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM5MDAsImlhdCI6MTY1OTQ1MjEwMCwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.WDGzSVrz5zLY1Petrg0BrnMYJCOtuJpLEKQi-MqCpImn5co6puabkGP78RUJTY22apRFZdNOX6JghlA8JpowGA
 Content-Length: 76
 Host: walkbook-api.herokuapp.com
 
@@ -676,7 +686,7 @@ Content-Type: application/json
 Content-Length: 124
 
 {
-  "id" : 1,
+  "id" : 7,
   "username" : "defaultUsername",
   "nickname" : "변경된nickname",
   "description" : "변경된desc"
@@ -692,8 +702,8 @@ Content-Length: 124
 <h5 id="_http_요청_5">HTTP 요청</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /api/v1/user/5 HTTP/1.1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTkzNzcwNjksImlhdCI6MTY1OTM3NTI2OSwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.N0F3HhZpOFCdc7psXqHb_O0hcj-EqpBK5WUVYBoWU6PKwXshzavbjfKiRxlp8s4phyxRelEih6O9s_rU6HKBeg
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /api/v1/user/11 HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM5MDAsImlhdCI6MTY1OTQ1MjEwMCwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.WDGzSVrz5zLY1Petrg0BrnMYJCOtuJpLEKQi-MqCpImn5co6puabkGP78RUJTY22apRFZdNOX6JghlA8JpowGA
 Host: walkbook-api.herokuapp.com</code></pre>
 </div>
 </div>
@@ -746,6 +756,487 @@ Content-Length: 22
 삭제되었습니다.</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_산책로_api">산책로 API</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_글_등록">글 등록</h3>
+<div class="sect4">
+<h5 id="_http_요청_6">HTTP 요청</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/post HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM5MDAsImlhdCI6MTY1OTQ1MjEwMCwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.WDGzSVrz5zLY1Petrg0BrnMYJCOtuJpLEKQi-MqCpImn5co6puabkGP78RUJTY22apRFZdNOX6JghlA8JpowGA
+Content-Length: 316
+Host: walkbook-api.herokuapp.com
+
+{
+  "title" : "title1",
+  "description" : "desc1",
+  "startPlace" : "start1",
+  "endPlace" : "end1",
+  "tmi" : "tmi1",
+  "paths" : [ {
+    "startX" : 1.0,
+    "startY" : 2.0,
+    "endX" : 3.0,
+    "endY" : 4.0
+  }, {
+    "startX" : 5.0,
+    "startY" : 6.0,
+    "endX" : 7.0,
+    "endY" : 8.0
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_응답_6">HTTP 응답</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 540
+
+{
+  "postId" : 13,
+  "title" : "title1",
+  "description" : "desc1",
+  "startPlace" : "start1",
+  "endPlace" : "end1",
+  "tmi" : "tmi1",
+  "isAuthor" : true,
+  "isLiked" : false,
+  "likeCount" : 0,
+  "author" : {
+    "id" : 6,
+    "username" : "defaultUsername",
+    "nickname" : "defaultNick",
+    "description" : "defaultDesc"
+  },
+  "paths" : [ {
+    "startX" : 1.0,
+    "startY" : 2.0,
+    "endX" : 3.0,
+    "endY" : 4.0
+  }, {
+    "startX" : 5.0,
+    "startY" : 6.0,
+    "endX" : 7.0,
+    "endY" : 8.0
+  } ]
+}</code></pre>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_글_전부_조회">글 전부 조회</h3>
+<div class="sect4">
+<h5 id="_http_요청_7">HTTP 요청</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/post/all HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM4OTksImlhdCI6MTY1OTQ1MjA5OSwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.mbZT4t6rC7Lo52auU9kO0aJrP_PVZsQFD_FtZ8ySpLoU7FwnrTP1hfVKowO3f0UfBdurPVvx4nrzdDjLC6KvaA
+Host: walkbook-api.herokuapp.com</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bearer {jwtToken} [Optional]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_http_응답_7">HTTP 응답</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 692
+
+{
+  "posts" : [ {
+    "postId" : 1,
+    "author" : {
+      "id" : 1,
+      "username" : "defaultUsername",
+      "nickname" : "defaultNick",
+      "description" : "defaultDesc"
+    },
+    "title" : "title1",
+    "description" : "desc1",
+    "startPlace" : "start1",
+    "endPlace" : "end1",
+    "tmi" : "tmi1",
+    "isAuthor" : true
+  }, {
+    "postId" : 2,
+    "author" : {
+      "id" : 1,
+      "username" : "defaultUsername",
+      "nickname" : "defaultNick",
+      "description" : "defaultDesc"
+    },
+    "title" : "title2",
+    "description" : "desc2",
+    "startPlace" : "start2",
+    "endPlace" : "end2",
+    "tmi" : "tmi2",
+    "isAuthor" : true
+  } ]
+}</code></pre>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_글_단건_조회">글 단건 조회</h3>
+<div class="sect4">
+<h5 id="_http_요청_8">HTTP 요청</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/post/9 HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM5MDAsImlhdCI6MTY1OTQ1MjEwMCwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.WDGzSVrz5zLY1Petrg0BrnMYJCOtuJpLEKQi-MqCpImn5co6puabkGP78RUJTY22apRFZdNOX6JghlA8JpowGA
+Host: walkbook-api.herokuapp.com</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. /api/v1/post/{id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">글ID</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bearer {jwtToken} [Optional]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_http_응답_8">HTTP 응답</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 539
+
+{
+  "postId" : 9,
+  "title" : "title1",
+  "description" : "desc1",
+  "startPlace" : "start1",
+  "endPlace" : "end1",
+  "tmi" : "tmi1",
+  "isAuthor" : true,
+  "isLiked" : false,
+  "likeCount" : 0,
+  "author" : {
+    "id" : 5,
+    "username" : "defaultUsername",
+    "nickname" : "defaultNick",
+    "description" : "defaultDesc"
+  },
+  "paths" : [ {
+    "startX" : 1.0,
+    "startY" : 2.0,
+    "endX" : 3.0,
+    "endY" : 4.0
+  }, {
+    "startX" : 5.0,
+    "startY" : 6.0,
+    "endX" : 7.0,
+    "endY" : 8.0
+  } ]
+}</code></pre>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_글_수정">글 수정</h3>
+<div class="sect4">
+<h5 id="_http_요청_9">HTTP 요청</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/v1/post/7 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM5MDAsImlhdCI6MTY1OTQ1MjEwMCwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.WDGzSVrz5zLY1Petrg0BrnMYJCOtuJpLEKQi-MqCpImn5co6puabkGP78RUJTY22apRFZdNOX6JghlA8JpowGA
+Content-Length: 359
+Host: walkbook-api.herokuapp.com
+
+{
+  "title" : "변경된title",
+  "description" : "변경된desc1",
+  "startPlace" : "변경된start",
+  "endPlace" : "변경된end",
+  "tmi" : "변경된tmi",
+  "paths" : [ {
+    "startX" : 4.0,
+    "startY" : 5.0,
+    "endX" : 6.0,
+    "endY" : 7.0
+  }, {
+    "startX" : 8.0,
+    "startY" : 9.0,
+    "endX" : 10.0,
+    "endY" : 11.0
+  } ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 5. /api/v1/post/{id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">글ID</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bearer {jwtToken}</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_http_응답_9">HTTP 응답</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 582
+
+{
+  "postId" : 7,
+  "title" : "변경된title",
+  "description" : "변경된desc1",
+  "startPlace" : "변경된start",
+  "endPlace" : "변경된end",
+  "tmi" : "변경된tmi",
+  "isAuthor" : true,
+  "isLiked" : false,
+  "likeCount" : 0,
+  "author" : {
+    "id" : 4,
+    "username" : "defaultUsername",
+    "nickname" : "defaultNick",
+    "description" : "defaultDesc"
+  },
+  "paths" : [ {
+    "startX" : 4.0,
+    "startY" : 5.0,
+    "endX" : 6.0,
+    "endY" : 7.0
+  }, {
+    "startX" : 8.0,
+    "startY" : 9.0,
+    "endX" : 10.0,
+    "endY" : 11.0
+  } ]
+}</code></pre>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_글_삭제">글 삭제</h3>
+<div class="sect4">
+<h5 id="_http_요청_10">HTTP 요청</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /api/v1/post/3 HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM5MDAsImlhdCI6MTY1OTQ1MjEwMCwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.WDGzSVrz5zLY1Petrg0BrnMYJCOtuJpLEKQi-MqCpImn5co6puabkGP78RUJTY22apRFZdNOX6JghlA8JpowGA
+Host: walkbook-api.herokuapp.com</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 6. /api/v1/post/{id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">글ID</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bearer {jwtToken}</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_http_응답_10">HTTP 응답</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 16
+
+{
+  "id" : 3
+}</code></pre>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_글_좋아요">글 좋아요</h3>
+<div class="sect4">
+<h5 id="_http_요청_11">HTTP 요청</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/post/5/like HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTk0NTM5MDAsImlhdCI6MTY1OTQ1MjEwMCwidXNlcm5hbWUiOiJkZWZhdWx0VXNlcm5hbWUifQ.WDGzSVrz5zLY1Petrg0BrnMYJCOtuJpLEKQi-MqCpImn5co6puabkGP78RUJTY22apRFZdNOX6JghlA8JpowGA
+Host: walkbook-api.herokuapp.com</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 7. /api/v1/post/{id}/like</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">글ID</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bearer {jwtToken}</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_http_응답_11">HTTP 응답</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 2
+
+ok</code></pre>
+</div>
+</div>
 <hr>
 </div>
 </div>
@@ -754,7 +1245,7 @@ Content-Length: 22
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-02 02:09:49 KST
+Last updated 2022-08-02 23:53:28 KST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
