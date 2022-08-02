@@ -1,6 +1,8 @@
 package walkbook.dto.request.post;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import walkbook.domain.support.Line;
 
 import javax.validation.constraints.NotBlank;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdatePostRequest {
 
     @NotBlank

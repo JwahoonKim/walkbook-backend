@@ -11,6 +11,7 @@ import walkbook.dto.response.post.PostListResponse;
 import walkbook.service.PostService;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,8 +46,8 @@ public class PostController {
 
     // 글 삭제
     @DeleteMapping("/v1/post/{id}")
-    public Long delete(@AuthUser User authUser, @PathVariable Long id) {
-        return postService.delete(authUser, id);
+    public Map<String, Long> delete(@AuthUser User authUser, @PathVariable Long id) {
+        return Map.of("id" ,postService.delete(authUser, id));
     }
 
     // 좋아요 기능
