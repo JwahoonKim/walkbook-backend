@@ -14,12 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import walkbook.domain.User;
 import walkbook.domain.support.Line;
 import walkbook.dto.request.comment.CreateCommentRequest;
-import walkbook.dto.request.comment.UpdateCommentRequest;
+import walkbook.dto.request.commentReply.CreateCommentReplyRequest;
+import walkbook.dto.request.commentReply.UpdateCommentReplyRequest;
 import walkbook.dto.request.post.CreatePostRequest;
 import walkbook.dto.request.user.CreateUserRequest;
 import walkbook.dto.response.comment.CommentResponseDto;
+import walkbook.dto.response.commentReply.CommentReplyResponseDto;
 import walkbook.dto.response.post.PostDetailResponseDto;
 import walkbook.dto.response.user.UserResponseDto;
+import walkbook.service.CommentReplyService;
 import walkbook.service.CommentService;
 import walkbook.service.PostService;
 import walkbook.service.UserService;
@@ -34,14 +37,13 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @Transactional
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs(uriScheme = "https", uriHost = "walkbook-api.herokuapp.com", uriPort = 443)
 @SpringBootTest
-class CommentControllerTest {
+class CommentReplyControllerTest {
 
     @Autowired
     private UserService userService;
@@ -53,19 +55,23 @@ class CommentControllerTest {
     private CommentService commentService;
 
     @Autowired
+    private CommentReplyService commentReplyService;
+
+    @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final String URL = "/api/v1";
+    private final String URL = "/api/v1/comment";
     private UserResponseDto defaultUser;
     private PostDetailResponseDto defaultPost;
     private CommentResponseDto defaultComment;
+    private CommentReplyResponseDto defaultReply;
     private String token;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         CreateUserRequest userRequest = new CreateUserRequest("defaultUsername", "1234", "defaultNick", "defaultDesc");
         defaultUser = userService.join(userRequest);
         HttpServletResponse mockResponse = new MockHttpServletResponse();
@@ -77,58 +83,22 @@ class CommentControllerTest {
         defaultPost = postService.save(new User(defaultUser.getId(), defaultUser.getUsername(), "1234", "defaultNick", "defaultDesc"), postRequest1);
         User user = new User(defaultUser.getId(), defaultUser.getUsername(), "1234", defaultUser.getNickname(), defaultUser.getDescription());
         defaultComment = commentService.save(user, defaultPost.getPostId(), new CreateCommentRequest("defaultComment"));
-    }
-
-
-    @Test
-    public void 댓글_등록_성공() throws Exception {
-        CreateCommentRequest request = new CreateCommentRequest("댓글1");
-
-        mockMvc.perform(post(URL + "/post/{postId}/comment", defaultPost.getPostId())
-                .header("Authorization", "Bearer " + token)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request)))
-                .andExpect(jsonPath("content").value(request.getContent()))
-                .andExpect(jsonPath("isAuthor").value(true))
-                .andExpect(jsonPath("user.username").value(defaultUser.getUsername()))
-                .andExpect(jsonPath("post.title").value(defaultPost.getTitle()))
-                .andDo(document("댓글 등록",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        pathParameters(
-                                parameterWithName("postId").description("글ID")
-                        ),
-                        requestHeaders(
-                                headerWithName("Authorization").description("Bearer {jwtToken}"))));
+        defaultReply = commentReplyService.save(user, defaultComment.getId(), new CreateCommentReplyRequest("defaultReply"));
     }
 
     @Test
-    public void 댓글_조회_성공() throws Exception {
-        mockMvc.perform(get(URL + "/comment/{commentId}", defaultComment.getId())
-                        .header("Authorization", "Bearer " + token))
-                .andExpect(jsonPath("content").value(defaultComment.getContent()))
-                .andExpect(jsonPath("isAuthor").value(true))
-                .andExpect(jsonPath("user.username").value(defaultUser.getUsername()))
-                .andExpect(jsonPath("post.title").value(defaultPost.getTitle()))
-                .andDo(document("댓글 조회",
-                        preprocessResponse(prettyPrint()),
-                        pathParameters(
-                                parameterWithName("commentId").description("댓글ID")
-                        ),
-                        requestHeaders(
-                                headerWithName("Authorization").description("Bearer {jwtToken} [Optional]"))));
-    }
+    public void 대댓글_등록_성공() throws Exception {
+        CreateCommentReplyRequest request = new CreateCommentReplyRequest("대댓글1");
 
-    @Test
-    public void 댓글_수정_성공() throws Exception {
-        UpdateCommentRequest request = new UpdateCommentRequest("변경된comment");
-
-        mockMvc.perform(patch(URL + "/comment/{commentId}", defaultComment.getId())
+        mockMvc.perform(post(URL + "/{commentId}/comment-reply", defaultComment.getId())
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(jsonPath("updateContent").value(request.getContent()))
-                .andDo(document("댓글 수정",
+                .andExpect(jsonPath("content").value(request.getContent()))
+                .andExpect(jsonPath("isAuthor").value(true))
+                .andExpect(jsonPath("user.username").value(defaultUser.getUsername()))
+                .andExpect(jsonPath("comment.content").value(defaultComment.getContent()))
+                .andDo(document("대댓글 등록",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         pathParameters(
@@ -139,14 +109,50 @@ class CommentControllerTest {
     }
 
     @Test
-    public void 댓글_삭제_성공() throws Exception {
-        mockMvc.perform(delete(URL + "/comment/{commentId}", defaultComment.getId())
+    public void 대댓글_조회_성공() throws Exception {
+        mockMvc.perform(get(URL + "/comment-reply/{replyId}", defaultReply.getId())
                         .header("Authorization", "Bearer " + token))
-                .andExpect(content().string("deleted"))
-                .andDo(document("댓글 삭제",
+                .andExpect(jsonPath("content").value(defaultReply.getContent()))
+                .andExpect(jsonPath("isAuthor").value(true))
+                .andExpect(jsonPath("user.username").value(defaultUser.getUsername()))
+                .andExpect(jsonPath("comment.content").value(defaultComment.getContent()))
+                .andDo(document("대댓글 조회",
                         preprocessResponse(prettyPrint()),
                         pathParameters(
-                                parameterWithName("commentId").description("댓글ID")
+                                parameterWithName("replyId").description("대댓글ID")
+                        ),
+                        requestHeaders(
+                                headerWithName("Authorization").description("Bearer {jwtToken}"))));
+    }
+
+    @Test
+    public void 대댓글_삭제_성공() throws Exception {
+        mockMvc.perform(get(URL + "/comment-reply/{replyId}", defaultReply.getId())
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk())
+                .andDo(document("대댓글 삭제",
+                        preprocessResponse(prettyPrint()),
+                        pathParameters(
+                                parameterWithName("replyId").description("대댓글ID")
+                        ),
+                        requestHeaders(
+                                headerWithName("Authorization").description("Bearer {jwtToken}"))));
+    }
+
+    @Test
+    public void 대댓글_수정_성공() throws Exception {
+        UpdateCommentReplyRequest request = new UpdateCommentReplyRequest("변경된reply");
+
+        mockMvc.perform(patch(URL + "/comment-reply/{replyId}", defaultReply.getId())
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(content().string(request.getContent()))
+                .andDo(document("대댓글 수정",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        pathParameters(
+                                parameterWithName("replyId").description("대댓글ID")
                         ),
                         requestHeaders(
                                 headerWithName("Authorization").description("Bearer {jwtToken}"))));

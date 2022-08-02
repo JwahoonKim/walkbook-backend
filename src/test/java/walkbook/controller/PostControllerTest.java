@@ -58,7 +58,7 @@ class PostControllerTest {
     private String token;
 
     @BeforeEach
-    public void setUserAndPost() {
+    public void setUp() {
         CreateUserRequest userRequest = new CreateUserRequest("defaultUsername", "1234", "defaultNick", "defaultDesc");
         defaultUser = userService.join(userRequest);
         HttpServletResponse mockResponse = new MockHttpServletResponse();

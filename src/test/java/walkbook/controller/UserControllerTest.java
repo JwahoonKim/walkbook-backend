@@ -51,7 +51,7 @@ class UserControllerTest {
     private String token;
 
     @BeforeEach
-    public void setUser() {
+    public void setUp() {
         CreateUserRequest request = new CreateUserRequest("defaultUsername", "1234", "defaultNick", "defaultDesc");
         defaultUser = userService.join(request);
         HttpServletResponse mockResponse = new MockHttpServletResponse();
